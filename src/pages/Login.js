@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { PropTypes } from 'prop-types';
+import { makeLogin } from '../actions';
 
 class Login extends React.Component {
   constructor() {
@@ -37,7 +38,9 @@ class Login extends React.Component {
   };
 
   sendInformation = () => {
-    const { history } = this.props;
+    const { history, userLogin } = this.props;
+    const { mail } = this.state;
+    userLogin(mail);
     history.push('/wallet');
   }
 
@@ -85,14 +88,15 @@ class Login extends React.Component {
   }
 }
 
-// const mapDispatchToProps = (dispatch) => ({
-
-// })
+const mapDispatchToProps = (dispatch) => ({
+  userLogin: (data) => dispatch(makeLogin(data)),
+});
 
 Login.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
   }).isRequired,
+  userLogin: PropTypes.func.isRequired,
 };
 
-export default connect(null, null)(Login);
+export default connect(null, mapDispatchToProps)(Login);
