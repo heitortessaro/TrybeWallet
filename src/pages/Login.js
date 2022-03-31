@@ -1,4 +1,6 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { PropTypes } from 'prop-types';
 
 class Login extends React.Component {
   constructor() {
@@ -34,8 +36,14 @@ class Login extends React.Component {
     }
   };
 
+  sendInformation = () => {
+    const { history } = this.props;
+    history.push('/wallet');
+  }
+
   render() {
     const { mail, password, btnDisabled } = this.state;
+    // console.log(this.props.history.push);
     return (
       <div>
         <h1> Login </h1>
@@ -60,14 +68,15 @@ class Login extends React.Component {
         />
         <br />
         { btnDisabled
-          && <>
-            <span>Confira e-mail e senha</span>
-            <br />
-          </>}
+          && (
+            <>
+              <span>Confira e-mail e senha</span>
+              <br />
+            </>)}
         <button
           type="button"
           disabled={ btnDisabled }
-          // onClick={}
+          onClick={ this.sendInformation }
         >
           Entrar
         </button>
@@ -76,4 +85,14 @@ class Login extends React.Component {
   }
 }
 
-export default Login;
+// const mapDispatchToProps = (dispatch) => ({
+
+// })
+
+Login.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
+};
+
+export default connect(null, null)(Login);
