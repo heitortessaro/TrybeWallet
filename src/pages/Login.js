@@ -1,29 +1,72 @@
 import React from 'react';
 
 class Login extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      mail: '',
+      password: '',
+      btnDisabled: true,
+    };
+  }
+
+  hangleChange = ({ target }) => {
+    const { name, value } = target;
+    // console.log(value);
+    this.setState({
+      [name]: value,
+    }, () => this.checkLoginInfo());
+  }
+
+  checkLoginInfo = () => {
+    const { mail, password } = this.state;
+    // regex retirado de https://regexr.com/3e48o
+    const re = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g;
+    const minPasswordSize = 6;
+    if (password.length >= minPasswordSize && mail.match(re)) {
+      this.setState({
+        btnDisabled: false,
+      });
+    } else {
+      this.setState({
+        btnDisabled: true,
+      });
+    }
+  };
+
   render() {
+    const { mail, password, btnDisabled } = this.state;
     return (
       <div>
         <h1> Login </h1>
         <input
           type="text"
-          name="userMail"
-          // value={}
-          // onChange={}
+          placeholder="e-mail"
+          name="mail"
+          value={ mail }
+          onChange={ this.hangleChange }
           id="login-user-mail"
           data-testid="email-input"
         />
+        <br />
         <input
-          type="text"
-          name="userPassword"
-          // value={}
-          // onChange={}
+          type="password"
+          name="password"
+          placeholder="senha"
+          value={ password }
+          onChange={ this.hangleChange }
           id="login-user-password"
           data-testid="password-input"
         />
+        <br />
+        { btnDisabled
+          && <>
+            <span>Confira e-mail e senha</span>
+            <br />
+          </>}
         <button
           type="button"
-          // disabled={}
+          disabled={ btnDisabled }
           // onClick={}
         >
           Entrar
