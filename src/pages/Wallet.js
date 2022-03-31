@@ -11,9 +11,8 @@ class Wallet extends React.Component {
   }
 
   componentDidMount() {
-    const { fetchCur } = this.props;
-    fetchCur();
-    console.log('teste');
+    const { getCurrencies } = this.props;
+    getCurrencies();
   }
 
   render() {
@@ -27,11 +26,11 @@ class Wallet extends React.Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  fetchCur: () => dispatch(fetchCurrencies()),
+  getCurrencies: () => dispatch(fetchCurrencies()),
 });
 
 Wallet.propTypes = {
-  fetchCur: PropTypes.func.isRequired,
+  getCurrencies: PropTypes.func.isRequired,
 };
 
 export default connect(null, mapDispatchToProps)(Wallet);

@@ -17,6 +17,7 @@ export default function wallet(state = INITIAL_STATE, action) {
   case SAVE_CURRENCIES:
     return {
       ...state,
+      loading: false,
       currencies: [...state.currencies, ...action.payload],
     };
   default:
