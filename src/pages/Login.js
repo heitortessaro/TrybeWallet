@@ -41,12 +41,11 @@ class Login extends React.Component {
     const { history, userLogin } = this.props;
     const { mail } = this.state;
     userLogin(mail);
-    history.push('/wallet');
+    history.push('/carteira');
   }
 
   render() {
     const { mail, password, btnDisabled } = this.state;
-    // console.log(this.props.history.push);
     return (
       <div>
         <h1> Login </h1>
