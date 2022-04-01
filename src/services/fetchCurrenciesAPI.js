@@ -4,10 +4,10 @@ const fetchCurrenciesAPI = async () => {
     const data = await resolve.json();
     const currencies = Object.keys(data).filter((curr) => curr !== 'USDT');
     // console.log(currencies);
-    return ['ok', currencies];
+    return { status: 'ok', data: currencies };
   } catch (error) {
     console.log(error);
-    return ['error', error];
+    return { status: 'error', data: error };
   }
 };
 

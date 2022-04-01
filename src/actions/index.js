@@ -1,3 +1,5 @@
+import fetchCurrenciesAPI from '../services/fetchCurrenciesAPI';
+
 // Coloque aqui suas actions
 // LOGIN ----------------------------------------
 export const LOGIN = 'LOGIN';
@@ -20,16 +22,21 @@ export const saveCurrencies = (payload) => ({
 export function fetchCurrencies() {
   return async (dispatch) => {
     dispatch(loading());
-    try {
-      const resolve = await fetch('https://economia.awesomeapi.com.br/json/all');
-      const data = await resolve.json();
-      const currencies = Object.keys(data).filter((curr) => curr !== 'USDT');
-      // console.log(currencies);
-      dispatch(saveCurrencies(currencies));
-    } catch (error) {
-      console.log(error);
+    const response = await fetchCurrenciesAPI();
+    if (response.status === 'ok') {
+      dispatch(saveCurrencies(response.data));
     }
   };
+  // try {
+  //   const resolve = await fetch('https://economia.awesomeapi.com.br/json/all');
+  //   const data = await resolve.json();
+  //   const currencies = Object.keys(data).filter((curr) => curr !== 'USDT');
+  //   // console.log(currencies);
+  //   dispatch(saveCurrencies(currencies));
+  // } catch (error) {
+  //   console.log(error);
+  // }
+  // };
   // return () => {
   //   // dispatch(loading());
   //   fetch('https://economia.awesomeapi.com.br/json/all')
