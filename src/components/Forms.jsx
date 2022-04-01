@@ -36,6 +36,7 @@ class Forms extends Component {
         tag: categoria,
         exchange: response.data,
       });
+      this.setState(INITIAL_STATE);
     }
   }
 
@@ -54,7 +55,7 @@ class Forms extends Component {
   }
 
   render() {
-    const { valor, descricao } = this.state;
+    const { valor, descricao, moeda, metodo, categoria } = this.state;
     const { currencies } = this.props;
     return (
       <div>
@@ -88,14 +89,15 @@ class Forms extends Component {
               data-testid="currency-input"
               name="moeda"
               id="moeda"
+              value={ moeda }
               onChange={ this.handleChange }
             >
-              {currencies.map((moeda) => (
+              {currencies.map((curr) => (
                 <option
-                  key={ `moeda${moeda}` }
-                  value={ moeda }
+                  key={ `moeda${curr}` }
+                  value={ curr }
                 >
-                  {moeda}
+                  {curr}
                 </option>))}
             </select>
           </label>
@@ -105,6 +107,7 @@ class Forms extends Component {
               data-testid="method-input"
               name="metodo"
               id="metodo"
+              value={ metodo }
               onChange={ this.handleChange }
             >
               <option value="dinheiro">Dinheiro</option>
@@ -118,6 +121,7 @@ class Forms extends Component {
               data-testid="tag-input"
               name="categoria"
               id="categoria"
+              value={ categoria }
               onChange={ this.handleChange }
             >
               <option value="alimentacao">Alimentação</option>
