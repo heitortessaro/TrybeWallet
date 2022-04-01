@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { PropTypes } from 'prop-types';
-import { fetchCurrencies } from '../actions/index';
+import fetchCurrenciesAPI from '../services/fetchCurrenciesAPI';
+// import { fetchCurrencies } from '../actions/index';
 
 // regex currency test: ^\$?\d+(\,\d*)?$,
 // font: https://stackoverflow.com/questions/11799539/regex-for-money-values-in-javascript
@@ -18,12 +19,26 @@ class Forms extends Component {
     };
   }
 
-  saveExpenses = () => {
-    const { getCurrencies, currencies } = this.props;
+  saveExpenses = async () => {
+    const { expenseId } = this.props;
     const { valor, moeda, metodo, categoria, descricao } = this.state;
-    console.log(getCurrencies());
-    console.log(currencies);
-    console.log(valor, moeda, metodo, categoria, descricao);
+    // console.log(await fetchCurrenciesAPI());
+    // console.log(currencies);
+    // console.log(valor, moeda, metodo, categoria, descricao);
+    const response = await fetchCurrenciesAPI();
+    if (response.status === 'ok') {
+      // console.log(response.data);
+      const infoObj = {
+        id: expenseId,
+        value: valor,
+        description: descricao,
+        currency: moeda,
+        method: metodo,
+        tag: categoria,
+        exchange: response.data,
+      };
+      console.log(infoObj);
+    }
   }
 
   handleChange = ({ target }) => {
@@ -128,15 +143,17 @@ class Forms extends Component {
 
 const mapStateToProps = (state) => ({
   currencies: state.wallet.currencies,
+  expenseId: state.wallet.nextId,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  getCurrencies: () => dispatch(fetchCurrencies()),
-});
+// const mapDispatchToProps = (dispatch) => ({
+//   getCurrencies: () => dispatch(fetchCurrencies()),
+// });
 
 Forms.propTypes = {
   currencies: PropTypes.arrayOf(PropTypes.string).isRequired,
-  getCurrencies: PropTypes.func.isRequired,
+  expenseId: PropTypes.number.isRequired,
+  // getCurrencies: PropTypes.func.isRequired,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Forms);
+export default connect(mapStateToProps, null)(Forms);

@@ -24,25 +24,26 @@ export function fetchCurrencies() {
     dispatch(loading());
     const response = await fetchCurrenciesAPI();
     if (response.status === 'ok') {
-      dispatch(saveCurrencies(response.data));
+      const currencies = Object.keys(response.data).filter((curr) => curr !== 'USDT');
+      dispatch(saveCurrencies(currencies));
     }
   };
-  // try {
-  //   const resolve = await fetch('https://economia.awesomeapi.com.br/json/all');
-  //   const data = await resolve.json();
-  //   const currencies = Object.keys(data).filter((curr) => curr !== 'USDT');
-  //   // console.log(currencies);
-  //   dispatch(saveCurrencies(currencies));
-  // } catch (error) {
-  //   console.log(error);
-  // }
-  // };
-  // return () => {
-  //   // dispatch(loading());
-  //   fetch('https://economia.awesomeapi.com.br/json/all')
-  //     .then((response) => response.json())
-  //     .then((json) => console.log(json))
-  //   // .then((json) => dispatch(getImage(json)))
-  //     .catch((error) => console.log(error));
-  // };
 }
+// try {
+//   const resolve = await fetch('https://economia.awesomeapi.com.br/json/all');
+//   const data = await resolve.json();
+//   const currencies = Object.keys(data).filter((curr) => curr !== 'USDT');
+//   // console.log(currencies);
+//   dispatch(saveCurrencies(currencies));
+// } catch (error) {
+//   console.log(error);
+// }
+// };
+// return () => {
+//   // dispatch(loading());
+//   fetch('https://economia.awesomeapi.com.br/json/all')
+//     .then((response) => response.json())
+//     .then((json) => console.log(json))
+//   // .then((json) => dispatch(getImage(json)))
+//     .catch((error) => console.log(error));
+// };

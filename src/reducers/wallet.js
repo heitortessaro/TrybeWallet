@@ -5,6 +5,7 @@ const INITIAL_STATE = {
   currencies: [],
   expenses: [],
   loading: false,
+  nextId: 0,
 };
 
 export default function wallet(state = INITIAL_STATE, action) {
