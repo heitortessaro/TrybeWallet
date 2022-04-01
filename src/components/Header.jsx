@@ -4,7 +4,7 @@ import { PropTypes } from 'prop-types';
 
 class Header extends Component {
   render() {
-    const { email } = this.props;
+    const { email, total } = this.props;
     return (
       <div>
         <h2>HEADER</h2>
@@ -18,7 +18,7 @@ class Header extends Component {
         <span
           data-testid="total-field"
         >
-          0
+          {total.toFixed(2)}
         </span>
         <br />
         <span
@@ -33,10 +33,12 @@ class Header extends Component {
 
 const mapStateToProps = (state) => ({
   email: state.user.email,
+  total: state.wallet.totalExpenses,
 });
 
 Header.propTypes = {
   email: PropTypes.string.isRequired,
+  total: PropTypes.number.isRequired,
 };
 
 export default connect(mapStateToProps, null)(Header);
