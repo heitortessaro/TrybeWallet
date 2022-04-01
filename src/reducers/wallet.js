@@ -25,6 +25,7 @@ export default function wallet(state = INITIAL_STATE, action) {
     return {
       ...state,
       expenses: [...state.expenses, action.payload],
+      nextId: (state.nextId + 1),
     };
   default:
     return state;

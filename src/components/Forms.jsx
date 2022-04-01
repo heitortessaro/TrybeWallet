@@ -27,6 +27,7 @@ class Forms extends Component {
     const { valor, moeda, metodo, categoria, descricao } = this.state;
     const response = await fetchCurrenciesAPI();
     if (response.status === 'ok') {
+      console.log(metodo);
       actSaveExpense({
         id: expenseId,
         value: valor,
@@ -34,7 +35,7 @@ class Forms extends Component {
         currency: moeda,
         method: metodo,
         tag: categoria,
-        exchange: response.data,
+        exchangeRates: response.data,
       });
       this.setState(INITIAL_STATE);
     }
@@ -110,9 +111,9 @@ class Forms extends Component {
               value={ metodo }
               onChange={ this.handleChange }
             >
-              <option value="dinheiro">Dinheiro</option>
-              <option value="credito">Cartão de crédito</option>
-              <option value="debito">Cartão de débito</option>
+              <option value="Dinheiro">Dinheiro</option>
+              <option value="Cartão de crédito">Cartão de crédito</option>
+              <option value="Cartão de débito">Cartão de débito</option>
             </select>
           </label>
           <label htmlFor="categoria">
@@ -124,11 +125,11 @@ class Forms extends Component {
               value={ categoria }
               onChange={ this.handleChange }
             >
-              <option value="alimentacao">Alimentação</option>
-              <option value="lazer">Lazer</option>
-              <option value="trabalho">Trabalho</option>
-              <option value="transporte">Transporte</option>
-              <option value="saude">Saúde</option>
+              <option value="Alimentação">Alimentação</option>
+              <option value="Lazer">Lazer</option>
+              <option value="Trabalho">Trabalho</option>
+              <option value="Transporte">Transporte</option>
+              <option value="Saúde">Saúde</option>
             </select>
           </label>
           <button
