@@ -14,11 +14,13 @@ class Table extends Component {
       'Moeda de conversão',
       'Editar/Excluir'];
     return (
-      <table>
-        <tr>
-          {header.map((item, index) => <th key={ `header${index}` }>Company</th>)}
-        </tr>
-      </table>
+      <div>
+        <table>
+          <tr>
+            {header.map((item, index) => <th key={ `header${index}` }>{item}</th>)}
+          </tr>
+        </table>
+      </div>
     );
   }
 }
