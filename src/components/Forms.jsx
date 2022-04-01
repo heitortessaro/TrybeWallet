@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { PropTypes } from 'prop-types';
+import { fetchCurrencies } from '../actions/index';
 
 // regex currency test: ^\$?\d+(\,\d*)?$,
 // font: https://stackoverflow.com/questions/11799539/regex-for-money-values-in-javascript
@@ -10,11 +11,19 @@ class Forms extends Component {
     super();
     this.state = {
       valor: '',
-      // moeda: 'USD',
-      // metodoPag: 'dinheiro',
-      // categoria: 'alimentacao',
+      moeda: 'USD',
+      metodo: 'dinheiro',
+      categoria: 'alimentacao',
       descricao: '',
     };
+  }
+
+  saveExpenses = () => {
+    const { getCurrencies, currencies } = this.props;
+    const { valor, moeda, metodo, categoria, descricao } = this.state;
+    console.log(getCurrencies());
+    console.log(currencies);
+    console.log(valor, moeda, metodo, categoria, descricao);
   }
 
   handleChange = ({ target }) => {
@@ -105,6 +114,12 @@ class Forms extends Component {
               <option value="saude">Saúde</option>
             </select>
           </label>
+          <button
+            type="button"
+            onClick={ this.saveExpenses }
+          >
+            Adicionar despesa
+          </button>
         </form>
       </div>
     );
@@ -115,8 +130,13 @@ const mapStateToProps = (state) => ({
   currencies: state.wallet.currencies,
 });
 
+const mapDispatchToProps = (dispatch) => ({
+  getCurrencies: () => dispatch(fetchCurrencies()),
+});
+
 Forms.propTypes = {
   currencies: PropTypes.arrayOf(PropTypes.string).isRequired,
+  getCurrencies: PropTypes.func.isRequired,
 };
 
-export default connect(mapStateToProps, null)(Forms);
+export default connect(mapStateToProps, mapDispatchToProps)(Forms);
