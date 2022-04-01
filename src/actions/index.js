@@ -10,6 +10,7 @@ export const makeLogin = (payload) => ({
 
 // Wallet ----------------------------------------
 export const SAVE_CURRENCIES = 'SAVE_CURRENCIES';
+export const SAVE_ExPENSE = 'SAVE_ExPENSE';
 
 export const loading = () => ({
   type: 'LOADING',
@@ -17,6 +18,10 @@ export const loading = () => ({
 
 export const saveCurrencies = (payload) => ({
   type: SAVE_CURRENCIES, payload,
+});
+
+export const saveExpense = (payload) => ({
+  type: SAVE_ExPENSE, payload,
 });
 
 export function fetchCurrencies() {
