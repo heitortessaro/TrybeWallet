@@ -10,9 +10,9 @@ class Forms extends Component {
     super();
     this.state = {
       valor: '',
-      moeda: 'USD',
-      metodoPag: 'dinheiro',
-      categoria: 'alimentacao',
+      // moeda: 'USD',
+      // metodoPag: 'dinheiro',
+      // categoria: 'alimentacao',
       descricao: '',
     };
   }
@@ -45,6 +45,7 @@ class Forms extends Component {
               data-testid="value-input"
               type="text"
               name="valor"
+              id="valor"
               value={ valor }
             />
           </label>
@@ -55,6 +56,7 @@ class Forms extends Component {
               data-testid="description-input"
               type="text"
               name="descricao"
+              id="descricao"
               value={ descricao }
             />
           </label>
@@ -63,6 +65,7 @@ class Forms extends Component {
             <select
               data-testid="currency-input"
               name="moeda"
+              id="moeda"
               onChange={ this.handleChange }
             >
               {currencies.map((moeda) => (
@@ -79,6 +82,7 @@ class Forms extends Component {
             <select
               data-testid="method-input"
               name="metodo"
+              id="metodo"
               onChange={ this.handleChange }
             >
               <option value="dinheiro">Dinheiro</option>
@@ -91,6 +95,7 @@ class Forms extends Component {
             <select
               data-testid="tag-input"
               name="categoria"
+              id="categoria"
               onChange={ this.handleChange }
             >
               <option value="alimentacao">Alimentação</option>
