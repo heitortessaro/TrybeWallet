@@ -10,7 +10,7 @@ export const makeLogin = (payload) => ({
 
 // Wallet ----------------------------------------
 export const SAVE_CURRENCIES = 'SAVE_CURRENCIES';
-export const SAVE_EXPENSE = 'SAVE_ExPENSE';
+export const SAVE_EXPENSE = 'SAVE_EXPENSE';
 
 export const loading = () => ({
   type: 'LOADING',

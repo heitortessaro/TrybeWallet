@@ -2,33 +2,32 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { PropTypes } from 'prop-types';
 import fetchCurrenciesAPI from '../services/fetchCurrenciesAPI';
+import { saveExpense } from '../actions';
 // import { fetchCurrencies } from '../actions/index';
 
 // regex currency test: ^\$?\d+(\,\d*)?$,
 // font: https://stackoverflow.com/questions/11799539/regex-for-money-values-in-javascript
 
+const INITIAL_STATE = {
+  valor: '',
+  moeda: 'USD',
+  metodo: 'dinheiro',
+  categoria: 'alimentacao',
+  descricao: '',
+};
+
 class Forms extends Component {
   constructor() {
     super();
-    this.state = {
-      valor: '',
-      moeda: 'USD',
-      metodo: 'dinheiro',
-      categoria: 'alimentacao',
-      descricao: '',
-    };
+    this.state = INITIAL_STATE;
   }
 
   saveExpenses = async () => {
-    const { expenseId } = this.props;
+    const { expenseId, actSaveExpense } = this.props;
     const { valor, moeda, metodo, categoria, descricao } = this.state;
-    // console.log(await fetchCurrenciesAPI());
-    // console.log(currencies);
-    // console.log(valor, moeda, metodo, categoria, descricao);
     const response = await fetchCurrenciesAPI();
     if (response.status === 'ok') {
-      // console.log(response.data);
-      const infoObj = {
+      actSaveExpense({
         id: expenseId,
         value: valor,
         description: descricao,
@@ -36,8 +35,7 @@ class Forms extends Component {
         method: metodo,
         tag: categoria,
         exchange: response.data,
-      };
-      console.log(infoObj);
+      });
     }
   }
 
@@ -146,14 +144,14 @@ const mapStateToProps = (state) => ({
   expenseId: state.wallet.nextId,
 });
 
-// const mapDispatchToProps = (dispatch) => ({
-//   getCurrencies: () => dispatch(fetchCurrencies()),
-// });
+const mapDispatchToProps = (dispatch) => ({
+  actSaveExpense: (expense) => dispatch(saveExpense(expense)),
+});
 
 Forms.propTypes = {
   currencies: PropTypes.arrayOf(PropTypes.string).isRequired,
   expenseId: PropTypes.number.isRequired,
-  // getCurrencies: PropTypes.func.isRequired,
+  actSaveExpense: PropTypes.func.isRequired,
 };
 
-export default connect(mapStateToProps, null)(Forms);
+export default connect(mapStateToProps, mapDispatchToProps)(Forms);
