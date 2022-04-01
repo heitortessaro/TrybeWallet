@@ -13,7 +13,7 @@ class Login extends React.Component {
     };
   }
 
-  hangleChange = ({ target }) => {
+  handleChange = ({ target }) => {
     const { name, value } = target;
     // console.log(value);
     this.setState({
@@ -24,7 +24,7 @@ class Login extends React.Component {
   checkLoginInfo = () => {
     const { mail, password } = this.state;
     // regex retirado de https://regexr.com/3e48o
-    const re = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g;
+    const re = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/;
     const minPasswordSize = 6;
     if (password.length >= minPasswordSize && mail.match(re)) {
       this.setState({
@@ -54,7 +54,7 @@ class Login extends React.Component {
           placeholder="e-mail"
           name="mail"
           value={ mail }
-          onChange={ this.hangleChange }
+          onChange={ this.handleChange }
           id="login-user-mail"
           data-testid="email-input"
         />
@@ -64,7 +64,7 @@ class Login extends React.Component {
           name="password"
           placeholder="senha"
           value={ password }
-          onChange={ this.hangleChange }
+          onChange={ this.handleChange }
           id="login-user-password"
           data-testid="password-input"
         />
