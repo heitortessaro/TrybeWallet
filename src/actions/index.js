@@ -11,6 +11,7 @@ export const makeLogin = (payload) => ({
 // Wallet ----------------------------------------
 export const SAVE_CURRENCIES = 'SAVE_CURRENCIES';
 export const SAVE_EXPENSE = 'SAVE_EXPENSE';
+export const SUM_ALL_EXPENSES = 'SUM_ALL_EXPENSES';
 
 export const loading = () => ({
   type: 'LOADING',
@@ -22,6 +23,10 @@ export const saveCurrencies = (payload) => ({
 
 export const saveExpense = (payload) => ({
   type: SAVE_EXPENSE, payload,
+});
+
+export const sumAllExpenses = () => ({
+  type: SUM_ALL_EXPENSES,
 });
 
 export function fetchCurrencies() {

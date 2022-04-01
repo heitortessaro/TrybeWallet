@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { PropTypes } from 'prop-types';
 import fetchCurrenciesAPI from '../services/fetchCurrenciesAPI';
-import { saveExpense } from '../actions';
+import { saveExpense, sumAllExpenses } from '../actions';
 // import { fetchCurrencies } from '../actions/index';
 
 // regex currency test: ^\$?\d+(\,\d*)?$,
@@ -23,11 +23,10 @@ class Forms extends Component {
   }
 
   saveExpenses = async () => {
-    const { expenseId, actSaveExpense } = this.props;
+    const { expenseId, actSaveExpense, updateAllExpenses } = this.props;
     const { valor, moeda, metodo, categoria, descricao } = this.state;
     const response = await fetchCurrenciesAPI();
     if (response.status === 'ok') {
-      console.log(metodo);
       actSaveExpense({
         id: expenseId,
         value: valor,
@@ -37,7 +36,7 @@ class Forms extends Component {
         tag: categoria,
         exchangeRates: response.data,
       });
-      this.setState(INITIAL_STATE);
+      this.setState(INITIAL_STATE, () => updateAllExpenses());
     }
   }
 
@@ -45,10 +44,8 @@ class Forms extends Component {
     const { name } = target;
     const { value } = target;
     const { valor: oldValue } = this.state;
-    const re = /^\$?\d+(,\d*)?$/;
+    const re = /^\$?\d+(\.\d*)?$/;
     if (name === 'valor' && !value.match(re)) {
-      // console.log(`foi ${value} -- ${oldValue}`);
-      // value = oldValue;
       this.setState({ [name]: oldValue });
     } else {
       this.setState({ [name]: value });
@@ -151,12 +148,14 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   actSaveExpense: (expense) => dispatch(saveExpense(expense)),
+  updateAllExpenses: () => dispatch(sumAllExpenses()),
 });
 
 Forms.propTypes = {
   currencies: PropTypes.arrayOf(PropTypes.string).isRequired,
   expenseId: PropTypes.number.isRequired,
   actSaveExpense: PropTypes.func.isRequired,
+  updateAllExpenses: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Forms);
