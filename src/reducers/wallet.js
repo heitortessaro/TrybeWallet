@@ -58,6 +58,7 @@ export default function wallet(state = INITIAL_STATE, action) {
     return {
       ...state,
       expenses: removeExpense(state, action.payload),
+      totalExpenses: sumExpenses(state),
     };
   default:
     return state;
