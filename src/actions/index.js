@@ -13,6 +13,8 @@ export const SAVE_CURRENCIES = 'SAVE_CURRENCIES';
 export const SAVE_EXPENSE = 'SAVE_EXPENSE';
 export const SUM_ALL_EXPENSES = 'SUM_ALL_EXPENSES';
 export const DELETE_EXPENSE = 'DELETE_EXPENSE';
+export const EDIT_EXPENSE = 'EDIT_EXPENSE';
+export const FINISH_EDIT_EXPENSE = 'FINISH_EDIT_EXPENSE';
 
 export const loading = () => ({
   type: 'LOADING',
@@ -32,6 +34,14 @@ export const sumAllExpenses = () => ({
 
 export const deleteExpense = (payload) => ({
   type: DELETE_EXPENSE, payload,
+});
+
+export const editExpense = (payload) => ({
+  type: EDIT_EXPENSE, payload,
+});
+
+export const finishEditExpense = (payload) => ({
+  type: FINISH_EDIT_EXPENSE, payload,
 });
 
 export function fetchCurrencies() {

@@ -12,6 +12,7 @@ const INITIAL_STATE = {
   nextId: 0,
   totalExpenses: 0,
   editing: true,
+  editingExpense: [],
 };
 
 // function reduceSum(acc, elem) {

@@ -17,9 +17,17 @@ const INITIAL_STATE = {
 };
 
 class Forms extends Component {
-  constructor() {
-    super();
-    this.state = INITIAL_STATE;
+  constructor(props) {
+    super(props);
+    const { editingExpense } = this.props;
+    console.log(editingExpense);
+    this.state = {
+      valor: '',
+      moeda: 'USD',
+      metodo: 'dinheiro',
+      categoria: 'alimentacao',
+      descricao: '',
+    };
   }
 
   saveExpenses = async () => {
@@ -144,6 +152,7 @@ class Forms extends Component {
 const mapStateToProps = (state) => ({
   currencies: state.wallet.currencies,
   expenseId: state.wallet.nextId,
+  editingExpense: state.wallet.editingExpense,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -154,6 +163,7 @@ const mapDispatchToProps = (dispatch) => ({
 Forms.propTypes = {
   currencies: PropTypes.arrayOf(PropTypes.string).isRequired,
   expenseId: PropTypes.number.isRequired,
+  editingExpense: PropTypes.arrayOf({}).isRequired,
   actSaveExpense: PropTypes.func.isRequired,
   updateAllExpenses: PropTypes.func.isRequired,
 };
