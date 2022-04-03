@@ -18,7 +18,6 @@ function sumExpenses(state) {
     .map((expense) => parseFloat(expense.value)
       * parseFloat(expense.exchangeRates[expense.currency].ask))
     .reduce((acc, atual) => acc + atual);
-  // console.log(state.expenses[0].value);
   return sumAll;
 }
 
