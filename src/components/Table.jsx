@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { PropTypes } from 'prop-types';
+import './table.css';
 
 class Table extends Component {
   render() {
@@ -15,7 +16,7 @@ class Table extends Component {
       'Moeda de conversão',
       'Editar/Excluir'];
     const { expenses } = this.props;
-    console.log(expenses);
+    // console.log(expenses);
     return (
       <div>
         <table>
@@ -32,6 +33,7 @@ class Table extends Component {
                 <td>{expense.method}</td>
                 <td>{expense.value}</td>
                 <td>{expense.currency}</td>
+                <td>cambio utilizado</td>
                 <td>valor convertido</td>
                 <td>moeda de conversão</td>
                 <td>editar</td>
