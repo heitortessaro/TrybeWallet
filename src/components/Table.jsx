@@ -4,6 +4,27 @@ import { PropTypes } from 'prop-types';
 import './table.css';
 
 class Table extends Component {
+  originalExchange = (expense) => {
+    const currencyInfo = expense.exchangeRates[expense.currency].name;
+    // let original = currencyInfo.slice(0, currencyInfo.indexOf('/'));
+    // if (original === 'Dólar Americano') {
+    //   original = 'Dólar Comercial';
+    // }
+    return currencyInfo;
+  }
+
+  finalExchange = (expense) => {
+    const currencyInfo = expense.exchangeRates[expense.currency].name;
+    const final = currencyInfo.slice(currencyInfo.indexOf('/') + 1);
+    return final;
+  }
+
+  convertValue = (expense) => {
+    const originalValue = expense.value;
+    const conversionRate = expense.exchangeRates[expense.currency].ask;
+    return (originalValue * conversionRate).toFixed(2);
+  }
+
   render() {
     const header = [
       'Descrição',
@@ -16,7 +37,7 @@ class Table extends Component {
       'Moeda de conversão',
       'Editar/Excluir'];
     const { expenses } = this.props;
-    // console.log(expenses);
+    console.log(expenses);
     return (
       <div>
         <table>
@@ -31,12 +52,16 @@ class Table extends Component {
                 <td>{expense.description}</td>
                 <td>{expense.tag}</td>
                 <td>{expense.method}</td>
-                <td>{expense.value}</td>
-                <td>{expense.currency}</td>
-                <td>cambio utilizado</td>
-                <td>valor convertido</td>
-                <td>moeda de conversão</td>
+                <td>{parseFloat(expense.value).toFixed(2)}</td>
+                {/* {console.log(typeof expense.value)} */}
+                <td>{this.originalExchange(expense)}</td>
+                <td>
+                  {parseFloat(expense.exchangeRates[expense.currency].ask).toFixed(2)}
+                </td>
+                <td>{this.convertValue(expense)}</td>
+                <td>Real</td>
                 <td>editar</td>
+                {}
               </tr>))}
           </tbody>
         </table>
