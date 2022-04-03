@@ -18,11 +18,13 @@ const INITIAL_STATE = {
 // }
 
 function sumExpenses(state) {
-  const sumAll = state.expenses
-    .map((expense) => parseFloat(expense.value)
+  if (state.expenses.length > 0) {
+    const sumAll = state.expenses
+      .map((expense) => parseFloat(expense.value)
       * parseFloat(expense.exchangeRates[expense.currency].ask))
-    .reduce((acc, atual) => acc + atual);
-  return sumAll;
+      .reduce((acc, atual) => acc + atual);
+    return sumAll;
+  }
 }
 
 function removeExpense(state, id) {
@@ -58,7 +60,6 @@ export default function wallet(state = INITIAL_STATE, action) {
     return {
       ...state,
       expenses: removeExpense(state, action.payload),
-      totalExpenses: sumExpenses(state),
     };
   default:
     return state;

@@ -2,9 +2,14 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { PropTypes } from 'prop-types';
 import './table.css';
-import { deleteExpense } from '../actions';
+import { deleteExpense, sumAllExpenses } from '../actions';
 
 class Table extends Component {
+  // componentDidMount() {
+  //   const { updateHeader } = this.props;
+  //   updateHeader();
+  // }
+
   originalExchange = (expense) => {
     const currencyInfo = expense.exchangeRates[expense.currency].name;
     // let original = currencyInfo.slice(0, currencyInfo.indexOf('/'));
@@ -26,11 +31,11 @@ class Table extends Component {
     return (originalValue * conversionRate).toFixed(2);
   }
 
-  // handleDelete = (id) => {
-  //   const { removeExpense } = this.props;
-  //   console.log(id);
-  //   removeExpense(id);
-  // }
+  removeAndUpdate = (id) => {
+    const { removeExpense, updateHeader } = this.props;
+    removeExpense(id);
+    updateHeader();
+  }
 
   render() {
     const header = [
@@ -43,7 +48,7 @@ class Table extends Component {
       'Valor convertido',
       'Moeda de conversão',
       'Editar/Excluir'];
-    const { expenses, removeExpense } = this.props;
+    const { expenses } = this.props;
     // console.log(expenses);
     return (
       <div>
@@ -75,7 +80,8 @@ class Table extends Component {
                   </button>
                   <button
                     type="button"
-                    onClick={ () => removeExpense(expense.id) }
+                    data-testid="delete-btn"
+                    onClick={ () => this.removeAndUpdate(expense.id) }
                   >
                     Excluir
                   </button>
@@ -95,11 +101,13 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   removeExpense: (id) => dispatch(deleteExpense(id)),
+  updateHeader: () => dispatch(sumAllExpenses()),
 });
 
 Table.propTypes = {
   expenses: PropTypes.arrayOf({}).isRequired,
   removeExpense: PropTypes.func.isRequired,
+  updateHeader: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Table);
