@@ -30,7 +30,7 @@ export const sumAllExpenses = () => ({
   type: SUM_ALL_EXPENSES,
 });
 
-export const deleteExpense = () => ({
+export const deleteExpense = (payload) => ({
   type: DELETE_EXPENSE, payload,
 });
 

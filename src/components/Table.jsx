@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { PropTypes } from 'prop-types';
 import './table.css';
+import { deleteExpense } from '../actions';
 
 class Table extends Component {
   originalExchange = (expense) => {
@@ -25,6 +26,12 @@ class Table extends Component {
     return (originalValue * conversionRate).toFixed(2);
   }
 
+  // handleDelete = (id) => {
+  //   const { removeExpense } = this.props;
+  //   console.log(id);
+  //   removeExpense(id);
+  // }
+
   render() {
     const header = [
       'Descrição',
@@ -36,8 +43,8 @@ class Table extends Component {
       'Valor convertido',
       'Moeda de conversão',
       'Editar/Excluir'];
-    const { expenses } = this.props;
-    console.log(expenses);
+    const { expenses, removeExpense } = this.props;
+    // console.log(expenses);
     return (
       <div>
         <table>
@@ -68,6 +75,7 @@ class Table extends Component {
                   </button>
                   <button
                     type="button"
+                    onClick={ () => removeExpense(expense.id) }
                   >
                     Excluir
                   </button>
@@ -85,8 +93,13 @@ const mapStateToProps = (state) => ({
   expenses: state.wallet.expenses,
 });
 
+const mapDispatchToProps = (dispatch) => ({
+  removeExpense: (id) => dispatch(deleteExpense(id)),
+});
+
 Table.propTypes = {
   expenses: PropTypes.arrayOf({}).isRequired,
+  removeExpense: PropTypes.func.isRequired,
 };
 
-export default connect(mapStateToProps, null)(Table);
+export default connect(mapStateToProps, mapDispatchToProps)(Table);
