@@ -1,4 +1,4 @@
-export const COLUMNS = [
+const COLUMNS = [
   {
     Header: 'Descrição',
     accessor: 'description',
@@ -23,8 +23,6 @@ export const COLUMNS = [
     Header: 'Câmbio utilizado',
     accessor: 'currency',
   },
-]
-'Câmbio utilizado',
-'Valor convertido',
-'Moeda de conversão',
-'Editar/Excluir'];
+];
+
+export default COLUMNS;

@@ -60,7 +60,18 @@ class Table extends Component {
                 </td>
                 <td>{this.convertValue(expense)}</td>
                 <td>Real</td>
-                <td>editar</td>
+                <td>
+                  <button
+                    type="button"
+                  >
+                    Editar
+                  </button>
+                  <button
+                    type="button"
+                  >
+                    Excluir
+                  </button>
+                </td>
                 {}
               </tr>))}
           </tbody>
