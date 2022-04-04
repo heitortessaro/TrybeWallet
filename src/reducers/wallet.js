@@ -1,9 +1,11 @@
 // Esse reducer será responsável por tratar o todas as informações relacionadas as despesas
 import {
   DELETE_EXPENSE,
+  EDIT_EXPENSE,
   SAVE_CURRENCIES,
   SAVE_EXPENSE,
-  SUM_ALL_EXPENSES } from '../actions';
+  SUM_ALL_EXPENSES,
+  FINISH_EDIT_EXPENSE } from '../actions';
 
 const INITIAL_STATE = {
   currencies: [],
@@ -11,7 +13,7 @@ const INITIAL_STATE = {
   loading: false,
   nextId: 0,
   totalExpenses: 0,
-  editing: true,
+  editing: false,
   editingExpense: [],
 };
 
@@ -32,6 +34,11 @@ function sumExpenses(state) {
 function removeExpense(state, id) {
   const remaningExpenses = state.expenses.filter((expense) => expense.id !== id);
   return remaningExpenses;
+}
+
+function findExpense(state, id) {
+  const selectExpense = state.expenses.filter((expense) => expense.id === id);
+  return selectExpense;
 }
 
 export default function wallet(state = INITIAL_STATE, action) {
@@ -62,6 +69,17 @@ export default function wallet(state = INITIAL_STATE, action) {
     return {
       ...state,
       expenses: removeExpense(state, action.payload),
+    };
+  case EDIT_EXPENSE:
+    return {
+      ...state,
+      editing: true,
+      editingExpense: findExpense(state, action.payload),
+    };
+  case FINISH_EDIT_EXPENSE:
+    return {
+      ...state,
+      editing: false,
     };
   default:
     return state;
