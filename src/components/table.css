@@ -35,3 +35,24 @@ table th {
   padding-bottom: 12px;
   padding-top: 12px;
 }
+
+.divTable .trash {
+  color: rgb(189, 6, 6);
+  border: 0;
+  cursor: pointer;
+  width: 30px;
+  margin-left: 15px;
+  background-color: transparent;
+}
+
+.divTable .edit {
+  color: black;
+  border: 0;
+  cursor: pointer;
+  width: 30px;
+  background-color: transparent;
+}
+
+.divTable .trash:hover, .divTable .edit:hover {
+  width: 35px;
+}
