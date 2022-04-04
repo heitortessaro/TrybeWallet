@@ -5,5 +5,8 @@
 }
 
 body {
-  font-size: 25px;
+  height: 100%;
+  background-color: #3d4c41;
+  font-family: Poppins, sans-serif;
+  font-size: 18px;
 }

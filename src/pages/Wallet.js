@@ -23,7 +23,6 @@ class Wallet extends React.Component {
     const { editing } = this.props;
     return (
       <div className="divWallet">
-        <h1>TrybeWallet</h1>
         <Header />
         {editing
           ? <FormsEditing />
