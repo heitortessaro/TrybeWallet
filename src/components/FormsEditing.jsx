@@ -1,51 +1,47 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { PropTypes } from 'prop-types';
-import fetchCurrenciesAPI from '../services/fetchCurrenciesAPI';
-import { saveExpense, sumAllExpenses } from '../actions';
+// import fetchCurrenciesAPI from '../services/fetchCurrenciesAPI';
+import { finishEditExpense } from '../actions';
 // import { fetchCurrencies } from '../actions/index';
 
 // regex currency test: ^\$?\d+(\,\d*)?$,
 // font: https://stackoverflow.com/questions/11799539/regex-for-money-values-in-javascript
 
-const INITIAL_STATE = {
-  valor: '',
-  moeda: 'USD',
-  metodo: 'dinheiro',
-  categoria: 'alimentacao',
-  descricao: '',
-};
+// const INITIAL_STATE = {
+//   valor: '',
+//   moeda: 'USD',
+//   metodo: 'dinheiro',
+//   categoria: 'alimentacao',
+//   descricao: '',
+// };
 
 class Forms extends Component {
   constructor(props) {
     super(props);
     const { editingExpense } = this.props;
-    console.log(editingExpense);
+    // console.log(editingExpense);
     this.state = {
-      valor: '',
-      moeda: 'USD',
-      metodo: 'dinheiro',
-      categoria: 'alimentacao',
-      descricao: '',
+      valor: editingExpense.value,
+      moeda: editingExpense.currency,
+      metodo: editingExpense.method,
+      categoria: editingExpense.tag,
+      descricao: editingExpense.description,
     };
   }
 
-  saveExpenses = async () => {
-    const { expenseId, actSaveExpense, updateAllExpenses } = this.props;
+  finishEditing = () => {
     const { valor, moeda, metodo, categoria, descricao } = this.state;
-    const response = await fetchCurrenciesAPI();
-    if (response.status === 'ok') {
-      actSaveExpense({
-        id: expenseId,
-        value: valor,
-        description: descricao,
-        currency: moeda,
-        method: metodo,
-        tag: categoria,
-        exchangeRates: response.data,
-      });
-      this.setState(INITIAL_STATE, () => updateAllExpenses());
-    }
+    const { editingExpense, saveEditedExpense } = this.props;
+    saveEditedExpense({
+      id: editingExpense.id,
+      value: valor,
+      description: descricao,
+      currency: moeda,
+      method: metodo,
+      tag: categoria,
+      exchangeRates: editingExpense.exchangeRates,
+    });
   }
 
   handleChange = ({ target }) => {
@@ -65,7 +61,7 @@ class Forms extends Component {
     const { currencies } = this.props;
     return (
       <div>
-        <h2>FORMS</h2>
+        <h2>FORMS EDITING</h2>
         <form className="forms">
           <label htmlFor="valor">
             Valor:
@@ -139,9 +135,9 @@ class Forms extends Component {
           </label>
           <button
             type="button"
-            onClick={ this.saveExpenses }
+            onClick={ this.finishEditing }
           >
-            Adicionar despesa
+            Editar despesa
           </button>
         </form>
       </div>
@@ -151,21 +147,31 @@ class Forms extends Component {
 
 const mapStateToProps = (state) => ({
   currencies: state.wallet.currencies,
-  expenseId: state.wallet.nextId,
+  // expenseId: state.wallet.nextId,
   editingExpense: state.wallet.editingExpense,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  actSaveExpense: (expense) => dispatch(saveExpense(expense)),
-  updateAllExpenses: () => dispatch(sumAllExpenses()),
+  // actSaveExpense: (expense) => dispatch(saveExpense(expense)),
+  // updateAllExpenses: () => dispatch(sumAllExpenses()),
+  saveEditedExpense: (expense) => dispatch(finishEditExpense(expense)),
 });
 
 Forms.propTypes = {
   currencies: PropTypes.arrayOf(PropTypes.string).isRequired,
-  expenseId: PropTypes.number.isRequired,
-  editingExpense: PropTypes.arrayOf({}).isRequired,
-  actSaveExpense: PropTypes.func.isRequired,
-  updateAllExpenses: PropTypes.func.isRequired,
+  // expenseId: PropTypes.number.isRequired,
+  editingExpense: PropTypes.shape({
+    value: PropTypes.string.isRequired,
+    currency: PropTypes.string.isRequired,
+    method: PropTypes.string.isRequired,
+    tag: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    id: PropTypes.number.isRequired,
+    exchangeRates: PropTypes.shape({}).isRequired,
+  }).isRequired,
+  // actSaveExpense: PropTypes.func.isRequired,
+  // updateAllExpenses: PropTypes.func.isRequired,
+  saveEditedExpense: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Forms);

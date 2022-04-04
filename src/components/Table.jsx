@@ -10,6 +10,11 @@ class Table extends Component {
   //   updateHeader();
   // }
 
+  // componentDidUpdate() {
+  //   const { updateHeader } = this.props;
+  //   updateHeader();
+  // }
+
   originalExchange = (expense) => {
     const currencyInfo = expense.exchangeRates[expense.currency].name;
     // let original = currencyInfo.slice(0, currencyInfo.indexOf('/'));
@@ -41,6 +46,7 @@ class Table extends Component {
     const { sendToEdit } = this.props;
     console.log('teste edit');
     sendToEdit(id);
+    // removeExpense(id);
     this.removeAndUpdate(id);
   }
 

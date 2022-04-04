@@ -14,7 +14,7 @@ const INITIAL_STATE = {
   nextId: 0,
   totalExpenses: 0,
   editing: false,
-  editingExpense: [],
+  editingExpense: {},
 };
 
 // function reduceSum(acc, elem) {
@@ -38,7 +38,7 @@ function removeExpense(state, id) {
 
 function findExpense(state, id) {
   const selectExpense = state.expenses.filter((expense) => expense.id === id);
-  return selectExpense;
+  return selectExpense[0];
 }
 
 export default function wallet(state = INITIAL_STATE, action) {
@@ -79,6 +79,7 @@ export default function wallet(state = INITIAL_STATE, action) {
   case FINISH_EDIT_EXPENSE:
     return {
       ...state,
+      expenses: [...state.expenses, action.payload],
       editing: false,
     };
   default:
