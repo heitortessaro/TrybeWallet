@@ -1,20 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { PropTypes } from 'prop-types';
-// import fetchCurrenciesAPI from '../services/fetchCurrenciesAPI';
 import { finishEditExpense } from '../actions';
-// import { fetchCurrencies } from '../actions/index';
-
-// regex currency test: ^\$?\d+(\,\d*)?$,
-// font: https://stackoverflow.com/questions/11799539/regex-for-money-values-in-javascript
-
-// const INITIAL_STATE = {
-//   valor: '',
-//   moeda: 'USD',
-//   metodo: 'dinheiro',
-//   categoria: 'alimentacao',
-//   descricao: '',
-// };
+import './form.css';
 
 class Forms extends Component {
   constructor(props) {
@@ -60,8 +48,7 @@ class Forms extends Component {
     const { valor, descricao, moeda, metodo, categoria } = this.state;
     const { currencies } = this.props;
     return (
-      <div>
-        <h2>FORMS EDITING</h2>
+      <div className="divForm">
         <form className="forms">
           <label htmlFor="valor">
             Valor:

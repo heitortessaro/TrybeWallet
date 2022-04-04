@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { PropTypes } from 'prop-types';
 import { makeLogin } from '../actions';
+import '../pageStyle/login.css';
 
 class Login extends React.Component {
   constructor() {
@@ -47,9 +48,10 @@ class Login extends React.Component {
   render() {
     const { mail, password, btnDisabled } = this.state;
     return (
-      <div>
-        <h1> Login </h1>
+      <div className="divLogin">
+        <h2 className="titleLogin"> LOGIN </h2>
         <input
+          className="inputLogin"
           type="text"
           placeholder="e-mail"
           name="mail"
@@ -58,8 +60,9 @@ class Login extends React.Component {
           id="login-user-mail"
           data-testid="email-input"
         />
-        <br />
+
         <input
+          className="inputLogin"
           type="password"
           name="password"
           placeholder="senha"
@@ -68,14 +71,12 @@ class Login extends React.Component {
           id="login-user-password"
           data-testid="password-input"
         />
-        <br />
+
         { btnDisabled
           && (
-            <>
-              <span>Confira e-mail e senha</span>
-              <br />
-            </>)}
+            <span className="spanLogin">Confira e-mail e senha</span>)}
         <button
+          className="buttonLogin"
           type="button"
           disabled={ btnDisabled }
           onClick={ this.sendInformation }

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { PropTypes } from 'prop-types';
 import fetchCurrenciesAPI from '../services/fetchCurrenciesAPI';
 import { saveExpense, sumAllExpenses } from '../actions';
+import './form.css';
 // import { fetchCurrencies } from '../actions/index';
 
 // regex currency test: ^\$?\d+(\,\d*)?$,
@@ -61,9 +62,8 @@ class Forms extends Component {
     const { valor, descricao, moeda, metodo, categoria } = this.state;
     const { currencies } = this.props;
     return (
-      <div>
-        <h2>FORMS</h2>
-        <form className="forms">
+      <div className="divForm">
+        <form>
           <label htmlFor="valor">
             Valor:
             <input

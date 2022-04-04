@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { PropTypes } from 'prop-types';
 import './table.css';
+import { FiTrash2, FiEdit3 } from 'react-icons/fi';
 import { deleteExpense, editExpense, sumAllExpenses } from '../actions';
 
 class Table extends Component {
@@ -22,11 +23,11 @@ class Table extends Component {
 
   originalExchange = (expense) => {
     const currencyInfo = expense.exchangeRates[expense.currency].name;
-    // let original = currencyInfo.slice(0, currencyInfo.indexOf('/'));
+    const original = currencyInfo.slice(0, currencyInfo.indexOf('/'));
     // if (original === 'Dólar Americano') {
     //   original = 'Dólar Comercial';
     // }
-    return currencyInfo;
+    return original;
   }
 
   finalExchange = (expense) => {
@@ -71,7 +72,7 @@ class Table extends Component {
     const negComparation = -1;
     // console.log(expenses);
     return (
-      <div>
+      <div className="divTable">
         <table>
           <thead>
             <tr>
@@ -96,18 +97,20 @@ class Table extends Component {
                   <td>Real</td>
                   <td>
                     <button
+                      className="edit"
                       type="button"
                       data-testid="edit-btn"
                       onClick={ () => this.editAndRemove(expense.id) }
                     >
-                      Editar
+                      <FiEdit3 size="1x" />
                     </button>
                     <button
+                      className="trash"
                       type="button"
                       data-testid="delete-btn"
                       onClick={ () => this.removeAndUpdate(expense.id) }
                     >
-                      Excluir
+                      <FiTrash2 size="1x" />
                     </button>
                   </td>
                   {}

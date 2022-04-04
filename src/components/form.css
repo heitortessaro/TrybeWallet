@@ -1,0 +1,40 @@
+.divForm {
+  width: 100%;
+  background-color: rgb(36, 33, 33);
+  padding: 14px 7px;
+  color: white;
+}
+
+.divForm form {
+  display: flex;
+  /* flex-direction:row; */
+  flex-wrap: wrap;
+  justify-content: space-around;
+  /* gap: 20px; */
+  row-gap: 20px;
+}
+
+.divForm label , .divForm button {
+  width: fit-content;
+  display: block;
+}
+
+.divForm input , .divForm select , .divForm button {
+  font-size: 1.1rem;
+  padding: 7px;
+  cursor: pointer;
+}
+
+.divForm input , .divForm select {
+  margin-left: 5px;
+}
+
+.divForm select , .divForm button {
+  border-radius: 5px;
+  background-color: white;
+  /* font-weight: 700; */
+}
+
+.divForm select:hover , .divForm button:hover {
+  font-weight: 700;
+}

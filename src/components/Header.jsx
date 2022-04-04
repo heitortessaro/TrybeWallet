@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { PropTypes } from 'prop-types';
 import { sumAllExpenses } from '../actions';
+import './header.css';
 
 class Header extends Component {
   componentDidMount() {
@@ -12,26 +13,21 @@ class Header extends Component {
   render() {
     const { email, total } = this.props;
     return (
-      <div>
-        <h2>HEADER</h2>
-        <br />
-        <span
-          data-testid="email-field"
-        >
-          {`Usuário ${email}`}
-        </span>
-        <br />
-        <span
-          data-testid="total-field"
-        >
-          {(total === 0 || total === undefined) ? 0 : total.toFixed(2)}
-        </span>
-        <br />
-        <span
-          data-testid="header-currency-field"
-        >
-          BRL
-        </span>
+      <div className="divHeader">
+        <h1>TrybeWallet</h1>
+        <div className="content">
+          <span
+            data-testid="email-field"
+          >
+            {`Usuário: ${email}`}
+          </span>
+          <span
+            data-testid="total-field"
+          >
+            {`Despesas totais: ${(total === 0 || total === undefined)
+              ? 0 : total.toFixed(2)} R$`}
+          </span>
+        </div>
       </div>
     );
   }
