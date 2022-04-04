@@ -22,6 +22,11 @@ class Forms extends Component {
     this.state = INITIAL_STATE;
   }
 
+  componentDidMount() {
+    const { updateAllExpenses } = this.props;
+    updateAllExpenses();
+  }
+
   saveExpenses = async () => {
     const { expenseId, actSaveExpense, updateAllExpenses } = this.props;
     const { valor, moeda, metodo, categoria, descricao } = this.state;

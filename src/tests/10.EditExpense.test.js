@@ -47,7 +47,7 @@ describe('10 - Crie um botão para editar uma despesa da tabela contendo as segu
     userEvent.selectOptions(methodInput, 'Dinheiro');
     userEvent.selectOptions(tagInput, 'Trabalho');
     userEvent.type(descriptionInput, 'Cem dólares canadenses');
-
+    
     expect(totalField).toContainHTML('187.12');
     fireEvent.click(editButton);
 
@@ -85,8 +85,9 @@ describe('10 - Crie um botão para editar uma despesa da tabela contendo as segu
         exchangeRates: mockData,
       },
     ];
-
+    
     expect(totalField).toContainHTML('551.78');
+    // screen.logTestingPlaygroundURL();
     expect(store.getState().wallet.expenses).toStrictEqual(newExpenses);
   });
 });

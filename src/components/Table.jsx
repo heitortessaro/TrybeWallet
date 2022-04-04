@@ -10,6 +10,11 @@ class Table extends Component {
   //   updateHeader();
   // }
 
+  // componentDidMount() {
+  //   const { updateHeader } = this.props;
+  //   updateHeader();
+  // }
+
   // componentDidUpdate() {
   //   const { updateHeader } = this.props;
   //   updateHeader();
@@ -43,11 +48,11 @@ class Table extends Component {
   }
 
   editAndRemove = (id) => {
-    const { sendToEdit } = this.props;
-    console.log('teste edit');
+    const { sendToEdit, removeExpense } = this.props;
+    // console.log('teste edit');
     sendToEdit(id);
-    // removeExpense(id);
-    this.removeAndUpdate(id);
+    removeExpense(id);
+    // this.removeAndUpdate(id);
   }
 
   render() {
@@ -62,6 +67,8 @@ class Table extends Component {
       'Moeda de conversão',
       'Editar/Excluir'];
     const { expenses } = this.props;
+    const posComparation = 1;
+    const negComparation = -1;
     // console.log(expenses);
     return (
       <div>
@@ -72,37 +79,39 @@ class Table extends Component {
             </tr>
           </thead>
           <tbody>
-            {expenses.length > 0 && expenses.map((expense) => (
-              <tr key={ expense.id }>
-                <td>{expense.description}</td>
-                <td>{expense.tag}</td>
-                <td>{expense.method}</td>
-                <td>{parseFloat(expense.value).toFixed(2)}</td>
-                {/* {console.log(typeof expense.value)} */}
-                <td>{this.originalExchange(expense)}</td>
-                <td>
-                  {parseFloat(expense.exchangeRates[expense.currency].ask).toFixed(2)}
-                </td>
-                <td>{this.convertValue(expense)}</td>
-                <td>Real</td>
-                <td>
-                  <button
-                    type="button"
-                    data-testid="edit-btn"
-                    onClick={ () => this.editAndRemove(expense.id) }
-                  >
-                    Editar
-                  </button>
-                  <button
-                    type="button"
-                    data-testid="delete-btn"
-                    onClick={ () => this.removeAndUpdate(expense.id) }
-                  >
-                    Excluir
-                  </button>
-                </td>
-                {}
-              </tr>))}
+            {expenses.length > 0 && expenses
+              .sort((a, b) => (a.id > b.id ? posComparation : negComparation))
+              .map((expense) => (
+                <tr key={ expense.id }>
+                  <td>{expense.description}</td>
+                  <td>{expense.tag}</td>
+                  <td>{expense.method}</td>
+                  <td>{parseFloat(expense.value).toFixed(2)}</td>
+                  {/* {console.log(typeof expense.value)} */}
+                  <td>{this.originalExchange(expense)}</td>
+                  <td>
+                    {parseFloat(expense.exchangeRates[expense.currency].ask).toFixed(2)}
+                  </td>
+                  <td>{this.convertValue(expense)}</td>
+                  <td>Real</td>
+                  <td>
+                    <button
+                      type="button"
+                      data-testid="edit-btn"
+                      onClick={ () => this.editAndRemove(expense.id) }
+                    >
+                      Editar
+                    </button>
+                    <button
+                      type="button"
+                      data-testid="delete-btn"
+                      onClick={ () => this.removeAndUpdate(expense.id) }
+                    >
+                      Excluir
+                    </button>
+                  </td>
+                  {}
+                </tr>))}
           </tbody>
         </table>
       </div>
