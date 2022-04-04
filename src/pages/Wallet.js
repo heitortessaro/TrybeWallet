@@ -6,6 +6,7 @@ import Header from '../components/Header';
 import Forms from '../components/Forms';
 import Table from '../components/Table';
 import FormsEditing from '../components/FormsEditing';
+import '../pageStyle/wallet.css';
 
 class Wallet extends React.Component {
   constructor() {
@@ -21,7 +22,7 @@ class Wallet extends React.Component {
   render() {
     const { editing } = this.props;
     return (
-      <div>
+      <div className="divWallet">
         <h1>TrybeWallet</h1>
         <Header />
         {editing

@@ -1,0 +1,57 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+/* 999999 */
+/* e6e6e6 */
+body {
+  height: 100%;
+  background-color: #3d4c41;
+  /* display: flex;
+  align-items: center;
+  justify-content: center; */
+  font-family: Poppins, sans-serif;
+  font-size: 18px;
+}
+
+.divLogin {
+  background-color: #999999;
+  width: 250px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.inputLogin, .spanLogin, .buttonLogin {
+  margin-top: 14px;
+}
+
+.buttonLogin {
+  font-size: 1.1rem;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.buttonLogin:enabled {
+  color:#3d4c41;
+  font-weight: 700;
+  /* background-color: #3d4c41; */
+}
+
+.inputLogin {
+  padding: 5px;
+  font-size: 1rem;
+  border-radius: 7px;
+}
+
+.spanLogin {
+  color: #7b3433;
+}
