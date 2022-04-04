@@ -53,6 +53,6 @@ table th {
   background-color: transparent;
 }
 
-.divTable .trash:hover, .divTable .edit:hover {
+.divTable .trash:hover , .divTable .edit:hover {
   width: 35px;
 }
