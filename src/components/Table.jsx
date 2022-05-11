@@ -70,7 +70,7 @@ class Table extends Component {
     const { expenses } = this.props;
     const posComparation = 1;
     const negComparation = -1;
-    // console.log(expenses);
+    console.log(expenses);
     return (
       <div className="divTable">
         <table>

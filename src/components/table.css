@@ -1,11 +1,9 @@
 /* retirado de https://www.w3schools.com/css/css_table.asp */
 table {
-  /* margin-top: 20px; */
   border-collapse: collapse;
-  /* font-family: Arial, Helvetica, sans-serif; */
   table-layout: fixed;
-  width: 100%;
   text-align: center;
+  width: 100%;
 }
 
 table td , table th {
@@ -25,10 +23,6 @@ table tr:hover {
   background-color: #ddd;
 }
 
-table tr {
-
-}
-
 table th {
   background-color: #017c4f;
   color: white;
@@ -37,20 +31,20 @@ table th {
 }
 
 .divTable .trash {
-  color: rgb(189, 6, 6);
-  border: 0;
-  cursor: pointer;
-  width: 30px;
-  margin-left: 15px;
   background-color: transparent;
+  border: 0;
+  color: rgb(189, 6, 6);
+  cursor: pointer;
+  margin-left: 15px;
+  width: 30px;
 }
 
 .divTable .edit {
-  color: black;
+  background-color: transparent;
   border: 0;
+  color: black;
   cursor: pointer;
   width: 30px;
-  background-color: transparent;
 }
 
 .divTable .trash:hover , .divTable .edit:hover {
