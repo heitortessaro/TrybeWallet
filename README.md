@@ -9,12 +9,12 @@ O projeto tem como objetivo desenvolver uma carteira de controle de gastos com c
 Esse projeto foi proposto como meio de avaliação pela Trybe. Após a finalização dos requisitos propostos, o projeto foi exportado para o repositório pessoal respeitando as regras dispostas no manual do estudante.
 
 ---
-# Preview do Projeto
+## Preview do Projeto
 
 O projeto pode ser acessado utilizando esse [link](https://trybewallet-mu.vercel.app/).
 
 ---
-# Habilidades
+## Habilidades
 
 Neste projeto, foram verificadas as seguintes habilidades:
 
